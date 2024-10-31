@@ -8,13 +8,19 @@ namespace DrinksInfo;
 
 public class UserInput
 {
-    // DrinksService drinksService = new();
-
-    // internal void GetCategoriesInput()
-    // {
-    //     drinksService.GetCategories();
-    // }
-
+    public int GetMenuChoice(int start, int end, string text)
+    {
+        int menuChoice = AnsiConsole.Prompt(
+        new TextPrompt<int>(text)
+        .Validate((n) =>
+        {
+            if (start <= n && n <= end)
+                return ValidationResult.Success();
+            else
+                return ValidationResult.Error($"[red]Pick a valid option[/]");
+        }));
+        return menuChoice;
+    }
 
     public bool ConfirmDelete()
     {
@@ -29,19 +35,6 @@ public class UserInput
         return confirmation;
     }
 
-    public int GetMenuChoice(int start, int end, string text)
-    {
-        int menuChoice = AnsiConsole.Prompt(
-        new TextPrompt<int>(text)
-        .Validate((n) =>
-        {
-            if (start <= n && n <= end)
-                return ValidationResult.Success();
-            else
-                return ValidationResult.Error($"[red]Pick a valid option[/]");
-        }));
-        return menuChoice;
-    }
 
     public string GetText(string message)
     {

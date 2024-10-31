@@ -13,8 +13,8 @@ public class Category
     public int ID { get; set; }
 }
 
-public class Categories
-{
-    [JsonProperty("drinks")]
-    public List<Category> CategoriesList { get; set; } = null!;
-}
+// public class Categories
+// {
+//     [JsonProperty("drinks")]
+//     public List<Category> CategoriesList { get; set; } = null!;
+// }

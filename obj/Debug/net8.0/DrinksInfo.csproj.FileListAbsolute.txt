@@ -18,3 +18,4 @@
 /Users/andrew/Sync/Programming/C#/cSharpAcademy/DrinksInfo/obj/Debug/net8.0/DrinksInfo.csproj.AssemblyReference.cache
 /Users/andrew/Sync/Programming/C#/cSharpAcademy/DrinksInfo/obj/Debug/net8.0/DrinksInfo.csproj.Up2Date
 /Users/andrew/Sync/Programming/C#/cSharpAcademy/DrinksInfo/bin/Debug/net8.0/Spectre.Console.dll
+/Users/andrew/Sync/Programming/C#/cSharpAcademy/DrinksInfo/obj/Debug/net8.0/DrinksInfo.sourcelink.json
