@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DrinksInfo.Class_Objects;
 using Microsoft.VisualBasic;
+using System.Data;
 
 namespace DrinksInfo;
 
@@ -11,12 +12,13 @@ public class Controller
 {
     DrinksService drinksService = new();
     UserInput userInput = new();
+    DisplayData display = new();
 
     internal void ShowCategories()
     {
         List<Category> categoryList = drinksService.GetCategories();
         // DisplayData.ShowCategories(categoryList);
-        DisplayData.ShowTable(categoryList, "Drink Categories",
+        display.ShowTable(categoryList, "Drink Categories",
             cat => cat.ID.ToString(),
             cat => cat.StrCategory);
 
@@ -31,16 +33,44 @@ public class Controller
             .Where(cat => cat.ID == menuChoice)
             .Select(cat => cat.StrCategory)
             .First();
-        GetDrinks(category);
+        List<Drink> drinksList = drinksService.GetDrinksByCategory(category);
+        ShowDrinks(drinksList);
     }
 
-    internal void GetDrinks(string category)
+    internal void ShowDrinks(List<Drink> drinksList)
     {
-        List<Drinks> drinksList = drinksService.GetDrinksByCategory(category);
-        // DisplayData.ShowDrinks(drinksList);
-        DisplayData.ShowTable(drinksList, "Drinks",
+        display.ShowTable(drinksList, "Drinks",
             drink => drink.ID.ToString(),
             drink => drink.StrDrink);
+
+        GetDrinkInfo(drinksList);
+    }
+
+    internal void GetDrinkInfo(List<Drink> drinksList)
+    {
+        int menuChoice = userInput.GetMenuChoice(1, drinksList.Count(), "Select a drink by ID:");
+        int idDrink = drinksList
+            .Where(cat => cat.ID == menuChoice)
+            .Select(cat => cat.DrinkID)
+            .First();
+        string drinkName = drinksList
+            .Where(cat => cat.ID == idDrink)
+            .Select(cat => cat.StrDrink)
+            .First();
+
+        Drink drinkInfo = drinksService.GetDrink(idDrink) switch
+        {
+            null => throw new InvalidOperationException($"{drinkName} was not found"),
+            Drink drink => drink
+        };
+
+        if (drinkInfo != null)
+            ShowDrinkInfo(drinkInfo);
+    }
+
+    internal void ShowDrinkInfo(Drink drinkInfo)
+    {
+
     }
 
 

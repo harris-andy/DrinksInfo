@@ -37,21 +37,21 @@ public class DrinksService
         return returnedList;
     }
 
-    public List<Drinks> GetDrinksByCategory(string categoryName)
+    public List<Drink> GetDrinksByCategory(string categoryName)
     {
         var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
         var request = new RestRequest($"filter.php?c={categoryName}");
         var response = client.ExecuteAsync(request);
-        List<Drinks> returnedList = new List<Drinks>();
+        List<Drink> returnedList = new List<Drink>();
 
         if (response.Result != null && response.Result.StatusCode == System.Net.HttpStatusCode.OK)
         {
             string? rawResponse = response.Result.Content;
 
             // var serialize = JsonConvert.DeserializeObject<Categories>(rawResponse ?? string.Empty);
-            var rootObject = JsonConvert.DeserializeObject<Dictionary<string, List<Drinks>>>(rawResponse ?? string.Empty);
+            var rootObject = JsonConvert.DeserializeObject<Dictionary<string, List<Drink>>>(rawResponse ?? string.Empty);
 
-            returnedList = rootObject?["drinks"] ?? new List<Drinks>();
+            returnedList = rootObject?["drinks"] ?? new List<Drink>();
 
             for (int i = 0; i < returnedList.Count; i++)
             {
@@ -59,6 +59,30 @@ public class DrinksService
             }
         }
         return returnedList;
+    }
+
+    public Drink? GetDrink(int idDrink)
+    {
+        var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
+        var request = new RestRequest($"lookup.php?i={idDrink}");
+        var response = client.ExecuteAsync(request);
+        // List<Drink> returnedList = new List<Drink>();
+
+        if (response.Result != null && response.Result.StatusCode == System.Net.HttpStatusCode.OK)
+        {
+            string? rawResponse = response.Result.Content;
+
+            // var serialize = JsonConvert.DeserializeObject<Categories>(rawResponse ?? string.Empty);
+            var rootObject = JsonConvert.DeserializeObject<Dictionary<string, List<Drink>>>(rawResponse ?? string.Empty);
+
+            return rootObject?["drinks"]?.FirstOrDefault();
+
+            // for (int i = 0; i < returnedList.Count; i++)
+            // {
+            //     returnedList[i].ID = i + 1;
+            // }
+        }
+        return null;
     }
 }
 

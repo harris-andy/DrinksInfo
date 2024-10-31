@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace DrinksInfo.Class_Objects;
 
-public class Drinks
+public class Drink
 {
     public int ID { get; set; }
 
@@ -15,16 +15,13 @@ public class Drinks
 
     [JsonProperty("idDrink")]
     public int DrinkID { get; set; }
-}
 
-public class Drink
-{
     // strDrink, idDrinnk, strGlass, strInstructions, List<strIngredient>, List<strMeasure>
-    [JsonProperty("idDrink")]
-    public int idDrink { get; set; }
+    // [JsonProperty("idDrink")]
+    // public int idDrink { get; set; }
 
-    [JsonProperty("strDrink")]
-    public string DrinkName { get; set; } = null!;
+    // [JsonProperty("strDrink")]
+    // public string DrinkName { get; set; } = null!;
 
     [JsonProperty("strGlass")]
     public string Glass { get; set; } = null!;
