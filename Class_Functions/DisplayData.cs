@@ -9,54 +9,28 @@ namespace DrinksInfo
 {
     public class DisplayData
     {
-        public static void ShowCategories(List<Category> categories)
+        public static void ShowTable<T>(List<T> items, string title, Func<T, string> getID, Func<T, string> getName)
         {
             var table = new Table();
             bool isAlternateRow = false;
-            table.Title("Drink Categories");
+            table.Title(title);
             table.BorderColor(Color.DarkSlateGray1);
             table.Border(TableBorder.Rounded);
             table.AddColumn(new TableColumn("[cyan1]ID[/]").LeftAligned());
             table.AddColumn(new TableColumn("[green1]Category[/]").RightAligned());
 
-            foreach (Category category in categories)
+            foreach (T item in items)
             {
                 var color = isAlternateRow ? "grey" : "blue";
                 table.AddRow(
-                    $"[{color}]{category.ID}[/]",
-                    $"[{color}]{category.StrCategory}[/]"
+                    $"[{color}]{getID(item)}[/]",
+                    $"[{color}]{getName(item)}[/]"
                 );
                 isAlternateRow = !isAlternateRow;
             }
             Console.Clear();
             AnsiConsole.Write(table);
         }
-
-        public static void ShowDrinks(List<Drink> drinks)
-        {
-            var table = new Table();
-            bool isAlternateRow = false;
-            table.Title("Drinks");
-            table.BorderColor(Color.DarkSlateGray1);
-            table.Border(TableBorder.Rounded);
-            table.AddColumn(new TableColumn("[cyan1]ID[/]").LeftAligned());
-            table.AddColumn(new TableColumn("[green1]Drink[/]").Centered());
-
-            foreach (Drink drink in drinks)
-            {
-                var color = isAlternateRow ? "grey" : "blue";
-                table.AddRow(
-                    $"[{color}]{drink.ID}[/]",
-                    $"[{color}]{drink.StrDrink}[/]"
-                );
-                isAlternateRow = !isAlternateRow;
-            }
-            Console.Clear();
-            AnsiConsole.Write(table);
-        }
-
-
-
 
         public void NothingFound(string item)
         {

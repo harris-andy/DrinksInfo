@@ -15,8 +15,11 @@ public class Controller
     internal void ShowCategories()
     {
         List<Category> categoryList = drinksService.GetCategories();
-        DisplayData.ShowCategories(categoryList);
-        // get menu choice
+        // DisplayData.ShowCategories(categoryList);
+        DisplayData.ShowTable(categoryList, "Drink Categories",
+            cat => cat.ID.ToString(),
+            cat => cat.StrCategory);
+
         GetCategory(categoryList);
     }
 
@@ -34,14 +37,13 @@ public class Controller
     internal void GetDrinks(string category)
     {
         List<Drink> drinksList = drinksService.GetDrinksByCategory(category);
-        DisplayData.ShowDrinks(drinksList);
+        // DisplayData.ShowDrinks(drinksList);
+        DisplayData.ShowTable(drinksList, "Drinks",
+            drink => drink.ID.ToString(),
+            drink => drink.StrDrink);
     }
 
-    // get user's selection for category
 
-    // run another http request to get drinks from that category
-
-    // display list of drinks
 
     // get user's selection for drink recipe
 
