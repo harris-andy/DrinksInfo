@@ -49,13 +49,9 @@ public class Controller
     internal void GetDrinkInfo(List<Drink> drinksList)
     {
         int menuChoice = userInput.GetMenuChoice(1, drinksList.Count(), "Select a drink by ID:");
-        int idDrink = drinksList
-            .Where(cat => cat.ID == menuChoice)
-            .Select(cat => cat.DrinkID)
-            .First();
-        string drinkName = drinksList
-            .Where(cat => cat.ID == idDrink)
-            .Select(cat => cat.StrDrink)
+        (int idDrink, string drinkName) = drinksList
+            .Where(drink => drink.ID == menuChoice)
+            .Select(drink => (drink.DrinkID, drink.StrDrink))
             .First();
 
         Drink drinkInfo = drinksService.GetDrink(idDrink) switch

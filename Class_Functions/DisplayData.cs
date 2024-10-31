@@ -39,30 +39,30 @@ public class DisplayData
         Thread.Sleep(2000);
     }
 
-    public void ShowDrinkDetails(List<Drink> drinkInfo)
+    public void ShowDrinkDetails(Drink drinkInfo)
     {
         var table = new Table();
         bool isAlternateRow = false;
-        table.Title("Drink Categories");
+        table.Title($"{drinkInfo.StrDrink} Details");
         table.BorderColor(Color.DarkSlateGray1);
         table.Border(TableBorder.Rounded);
-        table.AddColumn(new TableColumn("[cyan1]ID[/]").LeftAligned());
-        table.AddColumn(new TableColumn("[green1]Category[/]").RightAligned());
-        // table.AddColumn(new TableColumn("[blue1]Score[/]").RightAligned());
-        // table.AddColumn(new TableColumn("[yellow1]Questions[/]").RightAligned());
+        table.AddColumn(new TableColumn("[cyan1]Name[/]").LeftAligned());
+        table.AddColumn(new TableColumn("[green1]Glass[/]").RightAligned());
+        table.AddColumn(new TableColumn("[blue1]Ingredients[/]").RightAligned());
+        table.AddColumn(new TableColumn("[yellow1]Instructions[/]").RightAligned());
         // table.AddColumn(new TableColumn("[red1]% Correct[/]").LeftAligned());
 
         // foreach (List<Drink> drink in drinkInfo)
         // {
         // string grade = (record.Score / (float)record.Questions).ToString("P1");
-        // var color = isAlternateRow ? "grey" : "blue";
-        // table.AddRow(
-        //     // $"[{color}]{record.Date.ToShortDateString()}[/]",
-        //     $"[{color}]{category.ID}[/]",
-        //     $"[{color}]{category.StrCategory}[/]"
-        // $"[{color}]{record.Questions}[/]",
-        // $"[{color}]{grade}[/]"
-        // );
+        var color = isAlternateRow ? "grey" : "blue";
+        table.AddRow(
+        // $"[{color}]{record.Date.ToShortDateString()}[/]",
+        $"[{color}]{drinkInfo.StrDrink}[/]",
+        $"[{color}]{drinkInfo.Glass}[/]",
+        $"[{color}]{drinkInfo.Ingredient}[/]",
+        $"[{color}]{drinkInfo.Instructions}[/]"
+        );
         isAlternateRow = !isAlternateRow;
 
         Console.Clear();
