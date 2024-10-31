@@ -36,7 +36,7 @@ public class Controller
 
     internal void GetDrinks(string category)
     {
-        List<Drink> drinksList = drinksService.GetDrinksByCategory(category);
+        List<Drinks> drinksList = drinksService.GetDrinksByCategory(category);
         // DisplayData.ShowDrinks(drinksList);
         DisplayData.ShowTable(drinksList, "Drinks",
             drink => drink.ID.ToString(),

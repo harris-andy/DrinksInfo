@@ -37,21 +37,21 @@ public class DrinksService
         return returnedList;
     }
 
-    public List<Drink> GetDrinksByCategory(string categoryName)
+    public List<Drinks> GetDrinksByCategory(string categoryName)
     {
         var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
         var request = new RestRequest($"filter.php?c={categoryName}");
         var response = client.ExecuteAsync(request);
-        List<Drink> returnedList = new List<Drink>();
+        List<Drinks> returnedList = new List<Drinks>();
 
         if (response.Result != null && response.Result.StatusCode == System.Net.HttpStatusCode.OK)
         {
             string? rawResponse = response.Result.Content;
 
             // var serialize = JsonConvert.DeserializeObject<Categories>(rawResponse ?? string.Empty);
-            var rootObject = JsonConvert.DeserializeObject<Dictionary<string, List<Drink>>>(rawResponse ?? string.Empty);
+            var rootObject = JsonConvert.DeserializeObject<Dictionary<string, List<Drinks>>>(rawResponse ?? string.Empty);
 
-            returnedList = rootObject?["drinks"] ?? new List<Drink>();
+            returnedList = rootObject?["drinks"] ?? new List<Drinks>();
 
             for (int i = 0; i < returnedList.Count; i++)
             {
