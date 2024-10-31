@@ -14,7 +14,7 @@ public class Controller
 
     internal void ShowCategories()
     {
-        var categoryList = drinksService.GetCategories();
+        List<Category> categoryList = drinksService.GetCategories();
         DisplayData.ShowCategories(categoryList);
         // get menu choice
         GetCategory(categoryList);
@@ -24,7 +24,17 @@ public class Controller
     {
         int high = categoryList.Count();
         int menuChoice = userInput.GetMenuChoice(1, high, "Select a category by ID:");
+        string category = categoryList
+            .Where(cat => cat.ID == menuChoice)
+            .Select(cat => cat.StrCategory)
+            .First();
+        GetDrinks(category);
+    }
 
+    internal void GetDrinks(string category)
+    {
+        List<Drink> drinksList = drinksService.GetDrinksByCategory(category);
+        DisplayData.ShowDrinks(drinksList);
     }
 
     // get user's selection for category

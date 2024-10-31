@@ -37,10 +37,10 @@ public class DrinksService
         return returnedList;
     }
 
-    public List<Drink> GetDrinks()
+    public List<Drink> GetDrinksByCategory(string categoryName)
     {
         var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
-        var request = new RestRequest("list.php?c=list");
+        var request = new RestRequest($"filter.php?c={categoryName}");
         var response = client.ExecuteAsync(request);
         List<Drink> returnedList = new List<Drink>();
 

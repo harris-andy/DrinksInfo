@@ -11,7 +11,7 @@ public class Drink
     public int ID { get; set; }
 
     [JsonProperty("strDrink")]
-    public string DrinkDrink { get; set; } = null!;
+    public string StrDrink { get; set; } = null!;
 
     [JsonProperty("idDrink")]
     public int DrinkID { get; set; }
