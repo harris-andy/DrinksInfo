@@ -47,9 +47,9 @@ public class DisplayData
         table.BorderColor(Color.DarkSlateGray1);
         table.Border(TableBorder.Rounded);
         table.AddColumn(new TableColumn("[cyan1]Name[/]").LeftAligned());
-        table.AddColumn(new TableColumn("[green1]Glass[/]").RightAligned());
-        table.AddColumn(new TableColumn("[blue1]Ingredients[/]").RightAligned());
-        table.AddColumn(new TableColumn("[yellow1]Instructions[/]").RightAligned());
+        table.AddColumn(new TableColumn("[green1]Instructions[/]").RightAligned());
+        // table.AddColumn(new TableColumn("[blue1]Ingredients[/]").RightAligned());
+        table.AddColumn(new TableColumn("[yellow1]Glass[/]").RightAligned());
         // table.AddColumn(new TableColumn("[red1]% Correct[/]").LeftAligned());
 
         // foreach (List<Drink> drink in drinkInfo)
@@ -59,9 +59,9 @@ public class DisplayData
         table.AddRow(
         // $"[{color}]{record.Date.ToShortDateString()}[/]",
         $"[{color}]{drinkInfo.StrDrink}[/]",
-        $"[{color}]{drinkInfo.Glass}[/]",
-        $"[{color}]{drinkInfo.Ingredient}[/]",
-        $"[{color}]{drinkInfo.Instructions}[/]"
+        $"[{color}]{drinkInfo.Instructions}[/]",
+        // $"[{color}]{drinkInfo.Ingredient}[/]",
+        $"[{color}]{drinkInfo.Glass}[/]"
         );
         isAlternateRow = !isAlternateRow;
 

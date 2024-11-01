@@ -30,23 +30,19 @@ public class Drink
     public string Instructions { get; set; } = null!;
 
     [JsonConverter(typeof(NumberedStringListConverter), "strIngredient")]
-    public List<string> Ingredient { get; set; } = null!;
+    public List<string> Ingredients { get; set; } = new();
 
     [JsonConverter(typeof(NumberedStringListConverter), "strMeasure")]
-    public List<string> Measure { get; set; } = null!;
+    public List<string> Measures { get; set; } = new();
+
+    public List<string> MeasuredIngredients { get; set; } = null!;
 
     // [JsonConverter(typeof(NumberedStringListConverter), "strIngredient")]
     // public List<string> Ingredient { get; set; }
 
-    public void CreateIngredientMeasures()
-    {
-        // List<string> ingredients = Ingredient
-        //     .Where(ing => ing != null)
-        //     .Select(ing => ing);
-    }
-
-    // (int idDrink, string drinkName) = drinksList
-    //         .Where(drink => drink.ID == menuChoice)
-    //         .Select(drink => (drink.DrinkID, drink.StrDrink))
-    //         .First();
+    // public class DrinkResponse
+    // {
+    //     [JsonProperty("drinks")]
+    //     public List<Drink>? Drinks { get; set; }
+    // }
 }
