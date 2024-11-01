@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Xml.XPath;
 using DrinksInfo.Class_Objects;
 using Newtonsoft.Json;
 using RestSharp;
@@ -22,12 +16,7 @@ public class DrinksService
         if (response.Result != null && response.Result.StatusCode == System.Net.HttpStatusCode.OK)
         {
             string? rawResponse = response.Result.Content;
-
-            // var serialize = JsonConvert.DeserializeObject<Categories>(rawResponse ?? string.Empty);
-
-            // returnedList = serialize?.CategoriesList ?? new List<Category>();
             var rootObject = JsonConvert.DeserializeObject<Dictionary<string, List<Category>>>(rawResponse ?? string.Empty);
-
             returnedList = rootObject?["drinks"] ?? new List<Category>();
 
             for (int i = 0; i < returnedList.Count; i++)
@@ -48,10 +37,7 @@ public class DrinksService
         if (response.Result != null && response.Result.StatusCode == System.Net.HttpStatusCode.OK)
         {
             string? rawResponse = response.Result.Content;
-
-            // var serialize = JsonConvert.DeserializeObject<Categories>(rawResponse ?? string.Empty);
             var rootObject = JsonConvert.DeserializeObject<Dictionary<string, List<Drink>>>(rawResponse ?? string.Empty);
-
             returnedList = rootObject?["drinks"] ?? new List<Drink>();
 
             for (int i = 0; i < returnedList.Count; i++)
@@ -67,23 +53,13 @@ public class DrinksService
         var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
         var request = new RestRequest($"lookup.php?i={idDrink}");
         var response = client.ExecuteAsync(request);
-        // Drink drink = new Drink();
 
         if (response.Result != null && response.Result.StatusCode == System.Net.HttpStatusCode.OK)
         {
             string? rawResponse = response.Result.Content;
-
             var rootObject = JsonConvert.DeserializeObject<DrinkResponse>(rawResponse ?? string.Empty);
-
-
             return rootObject?.Drinks.FirstOrDefault();
         }
         return null;
     }
 }
-
-//  // This is the key change - we create an anonymous type to match the JSON structure
-// var rootObject = JsonConvert.DeserializeObject<Dictionary<string, List<Category>>>(rawResponse ?? string.Empty);
-
-// // Get the "drinks" list directly
-// returnedList = rootObject?["drinks"] ?? new List<Category>();

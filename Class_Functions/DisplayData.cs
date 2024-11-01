@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Threading.Tasks.Dataflow;
 using DrinksInfo.Class_Objects;
 using Spectre.Console;
 
@@ -33,7 +28,7 @@ namespace DrinksInfo
             AnsiConsole.Write(table);
         }
 
-        public void ShowDrinkDetails(Drink drinkInfo)
+        public void ShowDrinkRecipe(Drink drinkInfo)
         {
             var table = new Table();
             string ingredientList = string.Join("\n", drinkInfo.CombinedIngMsrList.Select(pair => $"• {pair}"));
@@ -41,7 +36,8 @@ namespace DrinksInfo
                     drinkInfo.Instructions.Split(". ")
                     .Select(sentence => sentence.Trim()));
             formattedInstructions = "• " + formattedInstructions;
-            table.Title($"{drinkInfo.StrDrink} Details");
+
+            table.Title($"{drinkInfo.StrDrink} Recipe");
             table.BorderColor(Color.DarkSlateGray1);
             table.Border(TableBorder.Rounded);
             table.AddColumn(new TableColumn("[cyan1]Name[/]").LeftAligned());

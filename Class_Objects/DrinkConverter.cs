@@ -1,7 +1,5 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
 
 namespace DrinksInfo.Class_Objects;
 
@@ -23,17 +21,13 @@ public class DrinkConverter : JsonConverter
             Instructions = (string)jsonObject["strInstructions"]!
         };
 
-        // Iterate through properties and populate lists based on pattern matching
         foreach (var property in jsonObject.Properties())
         {
             if (property.Name.StartsWith("strIngredient") && property.Value.Type == JTokenType.String)
-            {
                 drink.Ingredients.Add((string?)property.Value);
-            }
-            else if (property.Name.StartsWith("strMeasure") && property.Value.Type == JTokenType.String)
-            {
+
+            if (property.Name.StartsWith("strMeasure") && property.Value.Type == JTokenType.String)
                 drink.Measures.Add((string?)property.Value);
-            }
         }
         return drink;
     }
