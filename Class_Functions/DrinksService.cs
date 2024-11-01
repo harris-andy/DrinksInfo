@@ -75,6 +75,7 @@ public class DrinksService
 
             var rootObject = JsonConvert.DeserializeObject<DrinkResponse>(rawResponse ?? string.Empty);
 
+
             return rootObject?.Drinks.FirstOrDefault();
         }
         return null;

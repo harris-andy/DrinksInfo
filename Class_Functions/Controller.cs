@@ -73,10 +73,20 @@ public class Controller
         Console.WriteLine($"{drink.StrDrink}");
         Console.WriteLine($"{drink.Glass}");
         Console.WriteLine($"{drink.Instructions}");
-        foreach (string item in drink.CombinedIngMsrList)
-        {
-            Console.WriteLine($"{item}");
-        }
+        // foreach (string item in drink.CombinedIngMsrList)
+        // {
+        //     Console.WriteLine($"{item}");
+        // }
+        // foreach (string? item in drink.Ingredients)
+        // {
+        //     // Console.WriteLine($"{drink.Ingredients}");
+        //     // Console.WriteLine($"{drink.Measures}");
+        //     Console.WriteLine($"Ingredient: {item}");
+        // }
+        // foreach (string? item in drink.Measures)
+        // {
+        //     Console.WriteLine($"Measure: {item}");
+        // }
     }
 
 
