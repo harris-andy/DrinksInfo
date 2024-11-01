@@ -22,10 +22,12 @@ public class Drink
     [JsonProperty("strInstructions")]
     public string Instructions { get; set; } = null!;
 
-    [JsonConverter(typeof(NumberedStringListConverter), "strIngredient")]
-    public List<string> Ingredients { get; set; } = new();
+    // [JsonConverter(typeof(NumberedStringListConverter), "strIngredient")]
+    [JsonProperty("strIngredient")]
+    public string Ingredient1 { get; set; } = string.Empty;
 
-    [JsonConverter(typeof(NumberedStringListConverter), "strMeasure")]
-    public List<string> Measures { get; set; } = new();
+    // [JsonConverter(typeof(NumberedStringListConverter), "strMeasure")]
+    [JsonProperty("strMeasure")]
+    public string Measure { get; set; } = string.Empty;
 
 }

@@ -67,35 +67,18 @@ public class DrinksService
         var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
         var request = new RestRequest($"lookup.php?i={idDrink}");
         var response = client.ExecuteAsync(request);
+        Drink drink = new Drink();
 
         if (response.Result != null && response.Result.StatusCode == System.Net.HttpStatusCode.OK)
         {
             string? rawResponse = response.Result.Content;
 
-            Console.WriteLine("Raw JSON response:");
-            Console.WriteLine(rawResponse);
+            // var serialize = JsonConvert.DeserializeObject<Categories>(rawResponse ?? string.Empty);
+            var rootObject = JsonConvert.DeserializeObject<Dictionary<string, Drink>>(rawResponse ?? string.Empty);
 
-            var settings = new JsonSerializerSettings
-            {
-                NullValueHandling = NullValueHandling.Ignore,
-                Converters = new List<JsonConverter>
-            {
-                new NumberedStringListConverter("strIngredient"),
-                new NumberedStringListConverter("strMeasure")
-            }
-            };
+            drink = rootObject?["drinks"] ?? new Drink();
 
-            var result = JsonConvert.DeserializeObject<DrinkResponse>(rawResponse ?? string.Empty, settings);
-
-            var drink = result?.Drinks?.FirstOrDefault();
-            if (drink != null)
-            {
-                Console.WriteLine($"Deserialized ingredients count: {drink.Ingredients?.Count}");
-                foreach (var ing in drink.Ingredients ?? new List<string>())
-                {
-                    Console.WriteLine($"Ingredient: {ing}");
-                }
-            }
+            return drink;
         }
         return null;
     }
