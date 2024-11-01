@@ -16,13 +16,6 @@ public class Drink
     [JsonProperty("idDrink")]
     public int DrinkID { get; set; }
 
-    // strDrink, idDrinnk, strGlass, strInstructions, List<strIngredient>, List<strMeasure>
-    // [JsonProperty("idDrink")]
-    // public int idDrink { get; set; }
-
-    // [JsonProperty("strDrink")]
-    // public string DrinkName { get; set; } = null!;
-
     [JsonProperty("strGlass")]
     public string Glass { get; set; } = null!;
 
@@ -35,14 +28,4 @@ public class Drink
     [JsonConverter(typeof(NumberedStringListConverter), "strMeasure")]
     public List<string> Measures { get; set; } = new();
 
-    public List<string> MeasuredIngredients { get; set; } = null!;
-
-    // [JsonConverter(typeof(NumberedStringListConverter), "strIngredient")]
-    // public List<string> Ingredient { get; set; }
-
-    // public class DrinkResponse
-    // {
-    //     [JsonProperty("drinks")]
-    //     public List<Drink>? Drinks { get; set; }
-    // }
 }

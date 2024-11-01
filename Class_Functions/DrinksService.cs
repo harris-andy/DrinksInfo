@@ -72,10 +72,20 @@ public class DrinksService
         {
             string? rawResponse = response.Result.Content;
 
-            var result = JsonConvert.DeserializeObject<DrinkResponse>(rawResponse ?? string.Empty, new JsonSerializerSettings
+            Console.WriteLine("Raw JSON response:");
+            Console.WriteLine(rawResponse);
+
+            var settings = new JsonSerializerSettings
             {
-                NullValueHandling = NullValueHandling.Ignore
-            });
+                NullValueHandling = NullValueHandling.Ignore,
+                Converters = new List<JsonConverter>
+            {
+                new NumberedStringListConverter("strIngredient"),
+                new NumberedStringListConverter("strMeasure")
+            }
+            };
+
+            var result = JsonConvert.DeserializeObject<DrinkResponse>(rawResponse ?? string.Empty, settings);
 
             var drink = result?.Drinks?.FirstOrDefault();
             if (drink != null)
@@ -86,7 +96,6 @@ public class DrinksService
                     Console.WriteLine($"Ingredient: {ing}");
                 }
             }
-            return drink;
         }
         return null;
     }

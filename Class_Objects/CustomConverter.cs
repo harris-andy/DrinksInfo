@@ -12,8 +12,11 @@ public class NumberedStringListConverter : JsonConverter<List<string>>
 
     public NumberedStringListConverter(string prefix)
     {
+        Console.WriteLine($"[Converter] Constructor called with prefix: {prefix}");
         propertyPrefix = prefix;
     }
+
+    public override bool CanRead => true;
 
     public override List<string> ReadJson(
         JsonReader reader,
@@ -22,24 +25,53 @@ public class NumberedStringListConverter : JsonConverter<List<string>>
         bool hasExistingValue,
         JsonSerializer serializer)
     {
-        // if (reader.TokenType == JsonToken.Null)
-        //     return new List<string>();
+        Console.WriteLine($"[Converter] ReadJson called for prefix: {propertyPrefix}");
+        Console.WriteLine($"[Converter] Reader TokenType: {reader.TokenType}");
+        Console.WriteLine($"[Converter] Reader Path: {reader.Path}");
 
         var items = new List<string>();
-        var jObject = JObject.Load(reader);
 
-        // If we're at a property value, we need to start reading from the parent
-        for (int i = 1; i <= 15; i++)
+        try
         {
-            var propertyName = $"{propertyPrefix}{i}";
-            var value = jObject[propertyName]?.ToString();
+            var jObject = JObject.Load(reader);
+            Console.WriteLine("[Converter] Successfully loaded JObject");
+            Console.WriteLine("[Converter] Available properties:");
+            foreach (var prop in jObject.Properties())
+            {
+                Console.WriteLine($"- {prop.Name}: {prop.Value}");
+            }
 
-            if (string.IsNullOrWhiteSpace(value))
-                continue;
+            for (int i = 1; i <= 15; i++)
+            {
+                var propertyName = $"{propertyPrefix}{i}";
+                Console.WriteLine($"[Converter] Looking for property: {propertyName}");
 
-            items.Add(value);
+                var token = jObject[propertyName];
+                if (token != null)
+                {
+                    Console.WriteLine($"[Converter] Found token type: {token.Type}");
+                    var value = token.ToString();
+                    Console.WriteLine($"[Converter] Value: {value}");
+
+                    if (!string.IsNullOrWhiteSpace(value))
+                    {
+                        Console.WriteLine($"[Converter] Adding value to list: {value}");
+                        items.Add(value);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"[Converter] Property {propertyName} not found");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[Converter] Error: {ex.Message}");
+            Console.WriteLine($"[Converter] Stack trace: {ex.StackTrace}");
         }
 
+        Console.WriteLine($"[Converter] Final list count: {items.Count}");
         return items;
     }
 
