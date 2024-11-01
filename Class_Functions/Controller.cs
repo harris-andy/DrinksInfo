@@ -21,7 +21,9 @@ public class Controller
     internal void GetCategory(List<Category> categoryList)
     {
         int high = categoryList.Count();
-        int menuChoice = userInput.GetMenuChoice(1, high, "Select a category by ID:");
+        int menuChoice = userInput.GetMenuChoice(0, high, "Select a category by ID or Press 0 to Exit:");
+        if (menuChoice == 0)
+            Environment.Exit(0);
         string category = categoryList
             .Where(cat => cat.ID == menuChoice)
             .Select(cat => cat.StrCategory)
