@@ -63,29 +63,20 @@ public class Controller
 
         if (drinkInfo != null)
         {
-            // Console.WriteLine($"Drink name: {drinkName}");
-            // Console.WriteLine($"Drink ID: {idDrink}");
-            // Console.WriteLine($"DrinkInfo: {drinkInfo.Instructions}");
-            // // Console.WriteLine($"Ingredients: {drinkInfo.Ingredients}");
-            // // Console.WriteLine($"Ingredients: {drinkInfo.Measures}");
-            // // drinkInfo.CreateIngredientMeasures();
-            // // Console.WriteLine($"Debug - Number of ingredients: {drinkInfo.Ingredients?.Count ?? 0}");
-            // // Console.WriteLine($"Debug - Number of measures: {drinkInfo.Measures?.Count ?? 0}");
-            // // Console.WriteLine("\nIngredients:");
-            // Console.WriteLine($"Deserialized ingredients count: {drinkInfo.Ingredients?.Count}");
-            // foreach (var ing in drinkInfo.Ingredients ?? new List<string>())
-            // {
-            //     Console.WriteLine($"Ingredient: {ing}");
-            // }
-
-
+            drinkInfo.CombineIngredientsMeasures();
             ShowDrinkInfo(drinkInfo);
         }
     }
 
-    internal void ShowDrinkInfo(Drink drinkInfo)
+    internal void ShowDrinkInfo(Drink drink)
     {
-
+        Console.WriteLine($"{drink.StrDrink}");
+        Console.WriteLine($"{drink.Glass}");
+        Console.WriteLine($"{drink.Instructions}");
+        foreach (string item in drink.CombinedIngMsrList)
+        {
+            Console.WriteLine($"{item}");
+        }
     }
 
 
