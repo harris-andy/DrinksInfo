@@ -141,5 +141,4 @@ namespace DrinksInfo.Class_Objects
             }
         }
     }
-
 }

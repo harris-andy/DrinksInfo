@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 using DrinksInfo.Class_Objects;
 using Spectre.Console;
 
@@ -42,28 +43,29 @@ public class DisplayData
     public void ShowDrinkDetails(Drink drinkInfo)
     {
         var table = new Table();
-        bool isAlternateRow = false;
+        string ingredientList = string.Join("\n", drinkInfo.CombinedIngMsrList.Select(pair => $"• {pair}"));
+        string formattedInstructions = string.Join("\n• ",
+                drinkInfo.Instructions.Split(". ")
+                .Select(sentence => sentence.Trim()));
+        formattedInstructions = "• " + formattedInstructions;
         table.Title($"{drinkInfo.StrDrink} Details");
         table.BorderColor(Color.DarkSlateGray1);
         table.Border(TableBorder.Rounded);
         table.AddColumn(new TableColumn("[cyan1]Name[/]").LeftAligned());
-        table.AddColumn(new TableColumn("[green1]Instructions[/]").RightAligned());
-        // table.AddColumn(new TableColumn("[blue1]Ingredients[/]").RightAligned());
+        table.AddColumn(new TableColumn("[green1]Instructions[/]").LeftAligned());
+        table.AddColumn(new TableColumn("[blue1]Ingredients[/]").LeftAligned());
         table.AddColumn(new TableColumn("[yellow1]Glass[/]").RightAligned());
         // table.AddColumn(new TableColumn("[red1]% Correct[/]").LeftAligned());
 
-        // foreach (List<Drink> drink in drinkInfo)
-        // {
-        // string grade = (record.Score / (float)record.Questions).ToString("P1");
-        var color = isAlternateRow ? "grey" : "blue";
+        // var color = isAlternateRow ? "grey" : "blue";
         table.AddRow(
-        // $"[{color}]{record.Date.ToShortDateString()}[/]",
-        $"[{color}]{drinkInfo.StrDrink}[/]",
-        $"[{color}]{drinkInfo.Instructions}[/]",
-        // $"[{color}]{drinkInfo.Ingredient}[/]",
-        $"[{color}]{drinkInfo.Glass}[/]"
+            // $"[{color}]{record.Date.ToShortDateString()}[/]",
+            $"[grey]{drinkInfo.StrDrink}[/]",
+            $"[blue]{formattedInstructions}[/]",
+            $"[grey]{ingredientList}[/]",
+            $"[blue]{drinkInfo.Glass}[/]"
         );
-        isAlternateRow = !isAlternateRow;
+        // isAlternateRow = !isAlternateRow;
 
         Console.Clear();
         AnsiConsole.Write(table);

@@ -70,9 +70,10 @@ public class Controller
 
     internal void ShowDrinkInfo(Drink drink)
     {
-        Console.WriteLine($"{drink.StrDrink}");
-        Console.WriteLine($"{drink.Glass}");
-        Console.WriteLine($"{drink.Instructions}");
+        display.ShowDrinkDetails(drink);
+        // Console.WriteLine($"{drink.StrDrink}");
+        // Console.WriteLine($"{drink.Glass}");
+        // Console.WriteLine($"{drink.Instructions}");
         // foreach (string item in drink.CombinedIngMsrList)
         // {
         //     Console.WriteLine($"{item}");
