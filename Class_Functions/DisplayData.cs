@@ -13,7 +13,7 @@ public class DisplayData
         table.BorderColor(Color.DarkSlateGray1);
         table.Border(TableBorder.Rounded);
         table.AddColumn(new TableColumn("[cyan1]ID[/]").LeftAligned());
-        table.AddColumn(new TableColumn("[green1]Category[/]").RightAligned());
+        table.AddColumn(new TableColumn($"[green1]{title}[/]").RightAligned());
 
         foreach (T item in items)
         {
