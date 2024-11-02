@@ -44,4 +44,4 @@ This is my submission for the cSharpAcademy Drinks Info project found here: [Cod
 
 
 ## Questions & Comments
-- I left this synchronous but I plan to switch to asyn in the next project.
+- I left this synchronous but I plan to switch to async in the next project.
